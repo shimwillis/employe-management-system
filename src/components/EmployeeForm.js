@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../EmployeeForm.css';
 
 const EmployeeForm = () => {
@@ -7,6 +7,14 @@ const EmployeeForm = () => {
     email: '',
     position: '',
   });
+
+  // Load saved data from Local Storage (if available)
+  useEffect(() => {
+    const savedEmployee = localStorage.getItem('employee');
+    if (savedEmployee) {
+      setEmployee(JSON.parse(savedEmployee));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +27,11 @@ const EmployeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Employee Data:', employee);
+
+    // Save form data to Local Storage
+    localStorage.setItem('employee', JSON.stringify(employee));
+
+    // Optionally reset form fields
     setEmployee({
       name: '',
       email: '',
