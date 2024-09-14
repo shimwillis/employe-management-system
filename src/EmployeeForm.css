@@ -1,0 +1,31 @@
+/* EmployeeForm.css */
+
+.employee-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .employee-form label {
+    margin-bottom: 15px;
+  }
+  
+  .employee-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .employee-form button {
+    padding: 10px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .employee-form button:hover {
+    background-color: #4cae4c;
+  }
+  
