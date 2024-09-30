@@ -1,12 +1,17 @@
 import React from 'react';
-import EmployeeForm from './components/EmployeeForm';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import EmployeeManagement from './components/EmployeeManagement';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Employee Management System</h1>
-      <EmployeeForm />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<EmployeeManagement />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

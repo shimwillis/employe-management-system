@@ -36,3 +36,61 @@
     transform: rotate(360deg);
   }
 }
+
+.employee-management {
+  width: 300px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.employee-management h2 {
+  text-align: center;
+}
+
+.employee-management form {
+  display: flex;
+  flex-direction: column;
+}
+
+.employee-management form div {
+  margin-bottom: 10px;
+}
+
+.employee-management form label {
+  margin-bottom: 5px;
+}
+
+.employee-management form input {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.employee-management form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.employee-management form button:hover {
+  background-color: #0056b3;
+}
+
+.employee-management ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.employee-management ul li {
+  margin-bottom: 5px;
+}
+
+.employee-management ul li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.employee-management ul li a:hover {
+  text-decoration: underline;
+}

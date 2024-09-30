@@ -1,79 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import '../EmployeeForm.css';
+import React, { useState } from 'react';
 
-const EmployeeForm = () => {
-  const [employee, setEmployee] = useState({
-    name: '',
-    email: '',
-    position: '',
-  });
+function EmployeeForm({ onAddEmployee }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
-  // Load saved data from Local Storage (if available)
-  useEffect(() => {
-    const savedEmployee = localStorage.getItem('employee');
-    if (savedEmployee) {
-      setEmployee(JSON.parse(savedEmployee));
-    }
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmployee((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Employee Data:', employee);
-
-    // Save form data to Local Storage
-    localStorage.setItem('employee', JSON.stringify(employee));
-
-    // Optionally reset form fields
-    setEmployee({
-      name: '',
-      email: '',
-      position: '',
-    });
+  const handleAddEmployee = (event) => {
+    event.preventDefault();
+    const newEmployee = { name, email, phone };
+    onAddEmployee(newEmployee);
+    setName('');
+    setEmail('');
+    setPhone('');
   };
 
   return (
-    <form className="employee-form" onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={employee.name}
-          onChange={handleChange}
-        />
-      </label>
-
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={employee.email}
-          onChange={handleChange}
-        />
-      </label>
-
-      <label>
-        Position:
-        <input
-          type="text"
-          name="position"
-          value={employee.position}
-          onChange={handleChange}
-        />
-      </label>
-
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <h2>Add Employee</h2>
+      <form onSubmit={handleAddEmployee}>
+        <div>
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Phone:</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+        <button type="submit">Add</button>
+      </form>
+    </div>
   );
-};
+}
 
 export default EmployeeForm;
