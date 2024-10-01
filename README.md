@@ -31,7 +31,7 @@ The **Employee Management System** is a robust and user-friendly web application
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/employee-management-system.git
+   git clone https://github.com/shimwillis/employee-management-system.git
    ```
 
 2. **Navigate to the Project Directory**
