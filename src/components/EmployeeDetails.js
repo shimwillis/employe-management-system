@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { EmployeeContext } from '../context/EmployeeContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import PropTypes from 'prop-types';
 import './EmployeeForm.css';
+import PropTypes from 'prop-types';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -11,19 +13,29 @@ const schema = yup.object().shape({
   phone: yup.string().required('Phone number is required'),
 });
 
-function EmployeeForm({ onAddEmployee }) {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+function EmployeeDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { employees, updateEmployee } = useContext(EmployeeContext);
+  const employee = employees[id];
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: employee,
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
-    onAddEmployee(data);
-    reset();
+    updateEmployee(id, data);
+    navigate('/');
   };
+
+  if (!employee) {
+    return <p>Employee not found.</p>;
+  }
 
   return (
     <div className="employee-form">
-      <h2>Add Employee</h2>
+      <h2>Edit Employee</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Name:</label>
@@ -40,14 +52,14 @@ function EmployeeForm({ onAddEmployee }) {
           <input type="tel" {...register('phone')} />
           {errors.phone && <span className="error">{errors.phone.message}</span>}
         </div>
-        <button type="submit">Add</button>
+        <button type="submit">Update</button>
       </form>
     </div>
   );
 }
 
-EmployeeForm.propTypes = {
-  onAddEmployee: PropTypes.func.isRequired,
+EmployeeDetails.propTypes = {
+  // No props since we're using params and context
 };
 
-export default EmployeeForm;
+export default EmployeeDetails;

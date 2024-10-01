@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import EmployeeForm from './EmployeeForm';
 import EmployeeList from './EmployeeList';
+import { EmployeeContext } from '../context/EmployeeContext';
 
 function EmployeeManagement() {
-  const [employees, setEmployees] = useState([]);
-
-  useEffect(() => {
-    const storedEmployees = JSON.parse(localStorage.getItem('employees')) || [];
-    setEmployees(storedEmployees);
-  }, []);
-
-  const handleAddEmployee = (newEmployee) => {
-    const updatedEmployees = [...employees, newEmployee];
-    setEmployees(updatedEmployees);
-    localStorage.setItem('employees', JSON.stringify(updatedEmployees));
-  };
+  const { employees, addEmployee, updateEmployee, deleteEmployee } = useContext(EmployeeContext);
 
   return (
     <div className="employee-management">
-      <EmployeeForm onAddEmployee={handleAddEmployee} />
-      <EmployeeList employees={employees} />
+      <EmployeeForm onAddEmployee={addEmployee} />
+      <EmployeeList
+        employees={employees}
+        onUpdateEmployee={updateEmployee}
+        onDeleteEmployee={deleteEmployee}
+      />
     </div>
   );
 }
